@@ -1,11 +1,7 @@
 
 
 name: steep
-main: cpp.cpp
+main: ref.cpp
 
-dep:
-  - name: mkn.kul
-    version: master
-  - name: google.benchmark
-    version: master
+dep: mkn.kul
 
