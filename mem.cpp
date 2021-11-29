@@ -32,7 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // will seg fault if the stack limit is too low
 // *nix systems check "ulimit -s"
 
-#include "kul/proc.hpp"
+#include "mkn/kul/proc.hpp"
 
 #define MAX_SIZE 123456789
 
@@ -45,47 +45,47 @@ int main(int argc, char* argv[]){
 
     const uint64_t size(MAX_SIZE);
 
-    KOUT(NON) << "RAM in KB: "  << kul::this_proc::physicalMemory();
+    KOUT(NON) << "RAM in KB: "  << mkn::kul::this_proc::physicalMemory();
     {
         uint64_t ar[size];
         for(uint64_t i = 0; i < size; i++){
             ar[i] = i;
             no_op = ar[i];
         }
-        KOUT(NON) << "RAM in KB: "  << kul::this_proc::physicalMemory();
+        KOUT(NON) << "RAM in KB: "  << mkn::kul::this_proc::physicalMemory();
     }
-    kul::this_thread::sleep(11);
+    mkn::kul::this_thread::sleep(11);
 
-    KOUT(NON) << "RAM in KB: "  << kul::this_proc::physicalMemory();
+    KOUT(NON) << "RAM in KB: "  << mkn::kul::this_proc::physicalMemory();
     {
         std::array<uint64_t, size> ar;
         for(uint64_t i = 0; i < size; i++){
             ar[i] = i;
             no_op = ar[i];
         }
-        KOUT(NON) << "RAM in KB: "  << kul::this_proc::physicalMemory();
+        KOUT(NON) << "RAM in KB: "  << mkn::kul::this_proc::physicalMemory();
     }
-    kul::this_thread::sleep(11);
+    mkn::kul::this_thread::sleep(11);
 
-    KOUT(NON) << "RAM in KB: "  << kul::this_proc::physicalMemory();
+    KOUT(NON) << "RAM in KB: "  << mkn::kul::this_proc::physicalMemory();
     {
         uint64_t* ar = new uint64_t[size];
         for(uint64_t i = 0; i < size; i++){
             ar[i] = i;
             no_op = ar[i];
         }
-        KOUT(NON) << "RAM in KB: "  << kul::this_proc::physicalMemory();
+        KOUT(NON) << "RAM in KB: "  << mkn::kul::this_proc::physicalMemory();
         delete[] ar;
     }
-    kul::this_thread::sleep(11);
+    mkn::kul::this_thread::sleep(11);
 
-    KOUT(NON) << "RAM in KB: "  << kul::this_proc::physicalMemory();
+    KOUT(NON) << "RAM in KB: "  << mkn::kul::this_proc::physicalMemory();
     {
         std::vector<uint64_t> ar;
         for(uint64_t i = 0; i < size; i++){
             ar.push_back(i);
             no_op = ar[i];
         }
-        KOUT(NON) << "RAM in KB: "  << kul::this_proc::physicalMemory();
+        KOUT(NON) << "RAM in KB: "  << mkn::kul::this_proc::physicalMemory();
     }
 }

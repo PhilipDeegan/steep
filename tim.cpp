@@ -32,8 +32,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // will seg fault if the stack limit is too low
 // *nix systems check "ulimit -s"
 
-#include "kul/proc.hpp"
-#include "kul/time.hpp"
+#include "mkn/kul/proc.hpp"
+#include "mkn/kul/time.hpp"
 
 #define MAX_SIZE 123456789
 #define LOOP     10
@@ -46,7 +46,7 @@ int main(int argc, char* argv[]){
 
     const uint64_t size(MAX_SIZE);
 
-    auto now = kul::Now::NANOS();
+    auto now = mkn::kul::Now::NANOS();
     for(uint8_t i = 0; i < LOOP; i++){
         uint64_t ar[size];
         for(uint64_t i = 0; i < size; i++){
@@ -54,11 +54,11 @@ int main(int argc, char* argv[]){
             no_op = ar[i];
         }
     }
-    auto then = kul::Now::NANOS();
+    auto then = mkn::kul::Now::NANOS();
     KOUT(NON) << ((then - now) / LOOP) 
               << " : " << ((then - now) / LOOP / 1000000) << "(ms)";
 
-    now = kul::Now::NANOS();
+    now = mkn::kul::Now::NANOS();
     for(uint8_t i = 0; i < LOOP; i++){
         std::array<uint64_t, size> ar;
         for(uint64_t i = 0; i < size; i++){
@@ -66,11 +66,11 @@ int main(int argc, char* argv[]){
             no_op = ar[i];
         }
     }
-    then = kul::Now::NANOS();
+    then = mkn::kul::Now::NANOS();
     KOUT(NON) << ((then - now) / LOOP) 
               << " : " << ((then - now) / LOOP / 1000000) << "(ms)";
 
-    now = kul::Now::NANOS();
+    now = mkn::kul::Now::NANOS();
     for(uint8_t i = 0; i < LOOP; i++){
         uint64_t* ar = new uint64_t[size];
         for(uint64_t i = 0; i < size; i++){
@@ -79,11 +79,11 @@ int main(int argc, char* argv[]){
         }
         delete[] ar;
     }
-    then = kul::Now::NANOS();
+    then = mkn::kul::Now::NANOS();
     KOUT(NON) << ((then - now) / LOOP) 
               << " : " << ((then - now) / LOOP / 1000000) << "(ms)";
 
-    now = kul::Now::NANOS();
+    now = mkn::kul::Now::NANOS();
     for(uint8_t i = 0; i < LOOP; i++){
         std::vector<uint64_t> ar;
         for(uint64_t i = 0; i < size; i++){
@@ -91,7 +91,7 @@ int main(int argc, char* argv[]){
             no_op = ar[i];
         }
     }
-    then = kul::Now::NANOS();
+    then = mkn::kul::Now::NANOS();
     KOUT(NON) << ((then - now) / LOOP) 
               << " : " << ((then - now) / LOOP / 1000000) << "(ms)";
 }

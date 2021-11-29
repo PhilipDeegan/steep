@@ -32,8 +32,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // will seg fault if the stack limit is too low
 // *nix systems check "ulimit -s"
 
-#include "kul/proc.hpp"
-#include "kul/time.hpp"
+#include "mkn/kul/proc.hpp"
+#include "mkn/kul/time.hpp"
 
 static const constexpr uint64_t MAX_SIZE = 123456789;
 #define LOOP     100
@@ -78,104 +78,104 @@ int main(int argc, char* argv[]){
 
     // CPY
     {
-        auto now = kul::Now::NANOS();
+        auto now = mkn::kul::Now::NANOS();
         for(uint64_t j = 0; j < LOOP; j++)
             for(uint64_t i = 0; i < MAX_SIZE; i++)
                 Cpy(i);
-        auto then = kul::Now::NANOS();
+        auto then = mkn::kul::Now::NANOS();
         KOUT(NON) <<  ((then - now) / LOOP / 1000000) << "(ms) : uint64_t";
     }
 
     //constCpy
     {
-        auto now = kul::Now::NANOS();
+        auto now = mkn::kul::Now::NANOS();
         for(uint64_t j = 0; j < LOOP; j++)
             for(uint64_t i = 0; i < MAX_SIZE; i++)
                 constCpy(i);
-        auto then = kul::Now::NANOS();
+        auto then = mkn::kul::Now::NANOS();
         KOUT(NON) <<  ((then - now) / LOOP / 1000000) << "(ms) : const uint64_t";
     }
 
     //constRef
     {
-        auto now = kul::Now::NANOS();
+        auto now = mkn::kul::Now::NANOS();
         for(uint64_t j = 0; j < LOOP; j++)
             for(uint64_t i = 0; i < MAX_SIZE; i++)
                 constRef(i);
-        auto then = kul::Now::NANOS();
+        auto then = mkn::kul::Now::NANOS();
         KOUT(NON) <<  ((then - now) / LOOP / 1000000) << "(ms) : const uint64_t&";
     }
 
     //nonconstRef
     {
-        auto now = kul::Now::NANOS();
+        auto now = mkn::kul::Now::NANOS();
         for(uint64_t j = 0; j < LOOP; j++)
             for(uint64_t i = 0; i < MAX_SIZE; i++)
                 nonconstRef(i);
-        auto then = kul::Now::NANOS();
+        auto then = mkn::kul::Now::NANOS();
         KOUT(NON) <<  ((then - now) / LOOP / 1000000) << "(ms) : uint64_t&";
     }
 
     //constconstPtr
     {
-        auto now = kul::Now::NANOS();
+        auto now = mkn::kul::Now::NANOS();
         for(uint64_t j = 0; j < LOOP; j++)
             for(uint64_t i = 0; i < MAX_SIZE; i++)
                 constconstPtr(&i);
-        auto then = kul::Now::NANOS();
+        auto then = mkn::kul::Now::NANOS();
         KOUT(NON) <<  ((then - now) / LOOP / 1000000) << "(ms) : const uint64_t* const";
     }
 
     //const1Ptr
     {
-        auto now = kul::Now::NANOS();
+        auto now = mkn::kul::Now::NANOS();
         for(uint64_t j = 0; j < LOOP; j++)
             for(uint64_t i = 0; i < MAX_SIZE; i++)
                 const1Ptr(&i);
-        auto then = kul::Now::NANOS();
+        auto then = mkn::kul::Now::NANOS();
         KOUT(NON) <<  ((then - now) / LOOP / 1000000) << "(ms) : uint64_t* const ";
     }
 
     //const2Ptr
     {
-        auto now = kul::Now::NANOS();
+        auto now = mkn::kul::Now::NANOS();
         for(uint64_t j = 0; j < LOOP; j++)
             for(uint64_t i = 0; i < MAX_SIZE; i++)
                 const2Ptr(&i);
-        auto then = kul::Now::NANOS();
+        auto then = mkn::kul::Now::NANOS();
         KOUT(NON) <<  ((then - now) / LOOP / 1000000) << "(ms) : const uint64_t* ";
     }
 
     //constconstPtrRef
     {
-        auto now = kul::Now::NANOS();
+        auto now = mkn::kul::Now::NANOS();
         for(uint64_t j = 0; j < LOOP; j++)
             for(uint64_t i = 0; i < MAX_SIZE; i++)
                 constconstPtrRef(&i);
-        auto then = kul::Now::NANOS();
+        auto then = mkn::kul::Now::NANOS();
         KOUT(NON) <<  ((then - now) / LOOP / 1000000) << "(ms) : const uint64_t * const & ";
     }
 
     //const1PtrRef
     {
-        auto now = kul::Now::NANOS();
+        auto now = mkn::kul::Now::NANOS();
         for(uint64_t j = 0; j < LOOP; j++)
             for(uint64_t i = 0; i < MAX_SIZE; i++)
                 const1PtrRef(&i);
-        auto then = kul::Now::NANOS();
+        auto then = mkn::kul::Now::NANOS();
         KOUT(NON) <<  ((then - now) / LOOP / 1000000) << "(ms) : uint64_t * const & ";
     }
 
     // const2PtrRef
     // Requires local ptr
     {
-        auto now = kul::Now::NANOS();
+        auto now = mkn::kul::Now::NANOS();
         for(uint64_t j = 0; j < LOOP; j++)
             for(uint64_t i = 0; i < MAX_SIZE; i++){
                 const uint64_t * i1 = &i;
                 const2PtrRef(i1);
             }
-        auto then = kul::Now::NANOS();
+        auto then = mkn::kul::Now::NANOS();
         KOUT(NON) <<  ((then - now) / LOOP / 1000000) << "(ms) : const uint64_t*& ";
     }
 

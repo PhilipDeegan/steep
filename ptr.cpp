@@ -32,7 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // will seg fault if the stack limit is too low
 // *nix systems check "ulimit -s"
 
-#include "kul/log.hpp"
+#include "mkn/kul/log.hpp"
 
 bool comparePointersA(void * a, void * b){
     return (&a) == (&b);
